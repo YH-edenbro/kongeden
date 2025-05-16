@@ -8,7 +8,7 @@
       <div class="ms-auto">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">스레드</a>
+            <RouterLink to:="">스레드</RouterLink>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">도서 검색</a>
@@ -79,6 +79,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const books = [
   { title: '소년이 온다', img: '/books/book1.jpg' },
