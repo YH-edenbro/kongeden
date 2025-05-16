@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThRead - AI 도서 추천</title>
+  <style>
+    /* 전체 초기 설정 */
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    /* 상단 내비게이션 바 */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #111;
+      color: white;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff3c3c;
+    }
+
+    .navbar .menu a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .navbar .menu a:hover {
+      text-decoration: underline;
+    }
+
+    /* 배경 이미지 영역 */
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c'); /* 임시 이미지 URL */
+      background-size: cover;
+      background-position: center;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .hero .brand {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    /* 도서 슬라이더 영역 */
+    .slider-section {
+      padding: 40px;
+      text-align: center;
+    }
+
+    .slider-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .slider {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 20px;
+    }
+
+    .book {
+      min-width: 150px;
+      flex-shrink: 0;
+    }
+
+    .book img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .book-title {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">ThRead</div>
+    <div class="menu">
+      <a href="#">소개</a>
+      <a href="#">도서 검색</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>AI 기반 도서 추천 커뮤니티 서비스</h1>
+    <div class="brand">ThRead</div>
+  </div>
+
+  <div class="slider-section">
+    <h2>베스트셀러</h2>
+    <div class="slider">
+      <div class="book">
+        <img src="https://via.placeholder.com/150x220.png?text=소비의+간격" alt="소비의 간격" />
+        <div class="book-title">소비의 간격</div>
+      </div>
+      <div class="book">
+        <img src="https://via.placeholder.com/150x220.png?text=정재승의+보고서" alt="정재승의 인간 탐구 보고서" />
+        <div class="book-title">정재승의 인간 탐구 보고서</div>
+      </div>
+      <div class="book">
+        <img src="https://via.placeholder.com/150x220.png?text=파과" alt="파과" />
+        <div class="book-title">파과</div>
+      </div>
+      <div class="book">
+        <img src="https://via.placeholder.com/150x220.png?text=서" alt="서" />
+        <div class="book-title">서</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
