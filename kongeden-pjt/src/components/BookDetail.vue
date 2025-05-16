@@ -19,21 +19,29 @@
       <!-- 책 설명 -->
       <div class="col-md-9">
         <p class="mb-3"><strong>설명:</strong><br />{{ book.fields.description }}</p>
-        <p><strong>저자:</strong> {{ book.fields.author }}</p>
         <p><strong>출판사:</strong> {{ book.fields.publisher }}</p>
         <p><strong>출간일:</strong> {{ book.fields.pub_date }}</p>
         <p><strong>ISBN:</strong> {{ book.fields.isbn }}</p>
-        <p><strong>페이지 수:</strong> {{ book.fields.page }}</p>
+        <p><strong>고객 리뷰 평점:</strong> {{ book.fields.customer_review_rank }}</p>
       </div>
     </div>
 
     <!-- 작가 정보 섹션 -->
     <div class="mt-5">
       <h4>작가 정보</h4>
-      <div class="d-flex mt-3">
-        <p class="text-secondary">{{ book.fields.author_description }}</p>
+      <div class="d-flex align-items-start gap-3 mt-3">
+        <!-- 작가 이미지 -->
+        <img :src="book.fields.author_photo" alt="author-img" class="author-img">
+        
+        <!-- 작가 이름 + 소개 텍스트 -->
+        <div>
+          <p class="fw-bold mb-1">{{ book.fields.author }}</p>
+          <p class="text-secondary mb-0 text-wrap" style="max-width: 100%;">
+           {{ book.fields.author_info }}
+          </p>
+        </div>
       </div>
-    </div>
+  </div>
   </div>
 </template>
 
@@ -64,5 +72,6 @@ const goToThreadWrite = () => {
   object-fit: cover;
   border-radius: 50%;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
 }
 </style>
