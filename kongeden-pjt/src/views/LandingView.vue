@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!-- 배경 이미지와 중앙 텍스트 -->
     <div
       class="bg-image text-white d-flex flex-column justify-content-center align-items-center text-center"

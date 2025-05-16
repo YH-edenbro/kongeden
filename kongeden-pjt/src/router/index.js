@@ -1,11 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingView from '@/views/LandingView.vue'
-import BooksListView from '@/views/BooksListView.vue'
 import BookDetailView from '@/views/BookDetailView.vue'
 import ThreadDetailView from '@/views/ThreadDetailView.vue'
 import ThreadWriteView from '@/views/ThreadWriteView.vue'
-import BookList from '@/views/BooksListView.vue'
-import BookDetail from '@/views/BookDetailView.vue'
+import BooksListView from '@/views/BooksListView.vue'
 import ThreadListView from '@/views/ThreadListView.vue'
 
 const router = createRouter({
@@ -17,23 +15,31 @@ const router = createRouter({
       component: LandingView    
     },
     {
-      path: '/books',
-      component: BookList,
-      children: [
-        { path: '', name: 'book', component:BooksListView},
-        { path: '/:bookID', name: 'bookDetail', component:BookDetailView},
-      ]
+      path: '/book',
+      name: 'book',
+      component: BooksListView,
+    },
+    {
+      path: '/book/:bookId',
+      name: 'bookDetail',
+      component: BookDetailView,
     },
     {
       path: '/thread',
       name: 'thread',
-      component: ThreadListView,
-      children: [
-        {path: '/:threadId', name: 'threadDetail', component: ThreadDetailView},
-        {path: '/:bookId/write', name: 'threadWrite', component: ThreadWriteView}
-      ]
-    }
-  ],
+      component: ThreadListView
+    },
+    {
+      path: '/thread/:threadId', 
+      name: 'threadDetail', 
+      component: ThreadDetailView
+    },
+    {
+      path: '/thread/:bookId/write', 
+      name: 'threadWrite', 
+      component: ThreadWriteView
+    },
+  ]
 })
 
 export default router
