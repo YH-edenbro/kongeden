@@ -18,19 +18,27 @@ const router = createRouter({
       path: '/book',
       name: 'book',
       component: BooksListView,
-      children: [
-        { path: '/:bookID', name: 'bookDetail', component:BookDetailView},
-      ]
+    },
+    {
+      path: '/book/:bookId',
+      name: 'bookDetail',
+      component: BookDetailView,
     },
     {
       path: '/thread',
       name: 'thread',
-      component: ThreadListView,
-      children: [
-        {path: '/:threadId', name: 'threadDetail', component: ThreadDetailView},
-        {path: '/:bookId/write', name: 'threadWrite', component: ThreadWriteView}
-      ]
-    }
+      component: ThreadListView
+    },
+    {
+      path: '/thread/:threadId', 
+      name: 'threadDetail', 
+      component: ThreadDetailView
+    },
+    {
+      path: '/thread/:bookId/write', 
+      name: 'threadWrite', 
+      component: ThreadWriteView
+    },
   ]
 })
 
