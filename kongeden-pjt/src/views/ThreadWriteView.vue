@@ -43,7 +43,7 @@ const bookId = parseInt(route.params.bookId) // 문자열 → 숫자 변환 (sto
 
 const title = ref('')
 const content = ref('')
-const cover = ref('')
+
 
 
 // 1. 책 목록이 로드되지 않았을 수도 있으므로 mount 시 로드
@@ -61,7 +61,7 @@ const book = computed(() => {
     cover: ''
   }
 })
-
+const cover = book.cover
 import { useThreadStore } from '@/stores/bookstore' // 또는 '@/stores/thread' 경로
 
 const threadStore = useThreadStore()
@@ -77,7 +77,7 @@ function submitThread() {
   console.log('제출된 스레드:', {
     title: title.value,
     content: content.value,
-    cover: cover.value,
+    cover: cover,
     bookId: bookId
   })
 
