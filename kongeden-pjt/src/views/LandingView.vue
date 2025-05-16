@@ -1,29 +1,11 @@
 <template>
   <div>
-    <!-- 헤더 -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-      <a class="navbar-brand fw-bold" href="#">
-        <span style="color: red">Th</span>Read
-      </a>
-      <div class="ms-auto">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <RouterLink :to="{ name : 'threads' }">스레드</RouterLink>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">도서 검색</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
     <!-- 배경 이미지와 중앙 텍스트 -->
     <div
       class="bg-image text-white d-flex flex-column justify-content-center align-items-center text-center"
       style="background-image: url('/library-background.jpg'); height: 50vh; background-size: cover; background-position: center;"
     >
       <h1 class="display-5 fw-bold">AI 기반 도서 추천 커뮤니티 서비스</h1>
-      <h2 class="fs-2 mt-3">ThRead</h2>
     </div>
 
     <!-- 베스트셀러 섹션 -->
