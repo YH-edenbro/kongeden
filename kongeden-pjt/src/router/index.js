@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LandingView from '@/views/LandingView.vue'
 import BooksListView from '@/views/BooksListView.vue'
 import BookDetailView from '@/views/BookDetailView.vue'
+import ThreadsListView from '@/views/LandingView.vue'
+import ThreadDetailView from '@/views/BooksListView.vue'
+import ThreadWriteView from '@/views/BookDetailView.vue'
 
 
 const router = createRouter({
@@ -22,15 +25,16 @@ const router = createRouter({
       name: 'bookDetail',
       component: BookDetailView
     },
-
-        {
+    {
       path: '/threads',
       name: 'threadlistview',
-      component: ThreadsListView    
+      component: ThreadsListView 
+
     },
+
     {
       path: '/threads/:threadid',
-      name: 'book',
+      name: 'thread',
       component: ThreadDetailView
     },
     {
