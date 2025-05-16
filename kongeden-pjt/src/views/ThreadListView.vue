@@ -7,13 +7,10 @@
 
 <script setup>
 import ThreadList from '@/components/ThreadList.vue'
-import { ref, onMounted } from 'vue'
+import { useThreadStore } from '@/stores/bookstore' // 또는 '@/stores/thread'
+import { storeToRefs } from 'pinia'
 
-const threads = ref([])
-
-onMounted(async () => {
-  // 예시 API 호출
-  const res = await fetch('/api/threads')
-  threads.value = await res.json()
-})
+const threadStore = useThreadStore()
+const { threads } = storeToRefs(threadStore) // 반응형 참조로 가져오기
 </script>
+

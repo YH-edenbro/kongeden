@@ -1,28 +1,40 @@
 <template>
-  <div class="thread-card" @click="goToDetail">
-    <img :src="thread.image" alt="Thread image" class="w-full h-48 object-cover rounded-t-xl" />
-    <div class="p-4">
-      <h3 class="text-lg font-bold">{{ thread.title }}</h3>
-      <p class="text-sm text-gray-500 mt-2 line-clamp-3">{{ thread.summary }}</p>
-    </div>
+  <div class="card mb-3 p-3">
+    <h5 class="fw-bold">
+      <RouterLink :to="{name : 'threadDetail', params: {threadId: thread.threadId} }" class="text-decoration-none text-dark">
+        {{ thread.title }}
+      </RouterLink>
+    </h5>
+    <p>{{ thread.content }}</p>
+    <p class="text-muted small">📘 {{ getBookTitle(thread.bookId) }}</p>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+import { useBookStore } from '@/stores/bookstore'
+import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const props = defineProps({
-  thread: Object
+  thread: Object,
+  index: Number // 상세 보기 이동을 위해 index를 전달
 })
 
-const router = useRouter()
-const goToDetail = () => {
-  router.push(`/threads/${thread.id}`)
+const bookStore = useBookStore()
+
+// 책 제목 반환 함수
+function getBookTitle(bookId) {
+  const book = bookStore.books.find((b) => b.pk === bookId)
+  return book ? book.fields.title : '제목 없음'
 }
 </script>
 
 <style scoped>
-.thread-card {
-  @apply bg-white rounded-xl shadow-md cursor-pointer hover:shadow-lg transition;
+.card {
+  background-color: #f8f9fa;
+  transition: box-shadow 0.2s;
+}
+.card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 </style>

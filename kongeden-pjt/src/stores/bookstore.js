@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import booksData from '/fixtures/books.json'
 import categoriesData from '/fixtures/categories.json'
+import { ref } from 'vue'
 
 export const useBookStore = defineStore('bookstore', {
   state: () => ({
@@ -39,3 +40,20 @@ export const useBookStore = defineStore('bookstore', {
     },
   },
 })
+
+export const useThreadStore = defineStore('thread', () => {
+  const threads = ref([])
+  let id = 0
+
+  const addThread = function (thread) {
+    threads.value.push({
+      threadId: id++,
+      title: thread.title,
+      content: thread.content,
+      bookId: thread.bookId, // ⬅️ bookId도 저장
+      createdAt: new Date().toISOString(), // 선택: 작성 시간도 저장 가능
+    })
+  }
+
+  return { threads, addThread }
+}, { persist: true})

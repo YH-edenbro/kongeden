@@ -15,7 +15,7 @@
     <div class="mb-3">
       <label class="form-label">참고 도서</label>
       <div class="card p-3 d-flex flex-row align-items-center">
-        <img :src="book.img" alt="book cover" style="height: 100px;" class="me-3" />
+        <img :src="book.cover" alt="book cover" style="height: 100px;" class="me-3" />
         <div>
           <h5>{{ book.title }}</h5>
           <p class="mb-0">{{ book.author }}</p>
@@ -31,24 +31,40 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useBookStore } from '@/stores/bookstore' // 경로는 실제 프로젝트 구조에 맞게 조정
 
 const route = useRoute()
 const router = useRouter()
+const bookStore = useBookStore()
 
-const bookId = route.params.bookId
-
-// 예시 도서 정보 (실제 프로젝트에선 API 호출 또는 props 사용)
-const book = ref({
-  id: bookId,
-  title: '호밀밭의 파수꾼',
-  author: '제롬 데이비드 샐린저',
-  img: '/books/book1.jpg'
-})
+const bookId = parseInt(route.params.bookId) // 문자열 → 숫자 변환 (store에서 비교 위해 필요할 수 있음)
 
 const title = ref('')
 const content = ref('')
+const cover = ref('')
+
+
+// 1. 책 목록이 로드되지 않았을 수도 있으므로 mount 시 로드
+onMounted(() => {
+  if (bookStore.books.length === 0) {
+    bookStore.loadBooks()
+  }
+})
+
+// 2. bookId로 store에서 해당 도서 찾기
+const book = computed(() => {
+  return bookStore.books.find((b) => b.pk === bookId)?.fields || {
+    title: '도서를 찾을 수 없습니다',
+    author: '',
+    cover: ''
+  }
+})
+
+import { useThreadStore } from '@/stores/bookstore' // 또는 '@/stores/thread' 경로
+
+const threadStore = useThreadStore()
 
 function submitThread() {
   if (!title.value || !content.value) {
@@ -56,21 +72,31 @@ function submitThread() {
     return
   }
 
-  // 여기서 API 요청 등으로 thread 저장 가능
+
+  // store 또는 다른 로직에 제출
   console.log('제출된 스레드:', {
     title: title.value,
     content: content.value,
-    bookId: book.value.id
+    cover: cover.value,
+    bookId: bookId
   })
 
-  // 완료 후 페이지 이동
-  router.push('/threads')
+      // ✅ store에 저장
+  threadStore.addThread({
+    title: title.value,
+    content: content.value,
+    bookId: bookId, // 참조 도서 정보
+  })
+
+
+  router.push(`/book/${bookId}`)
 }
 
 function goBack() {
   router.back()
 }
 </script>
+
 
 <style scoped>
 .card {
