@@ -2,7 +2,7 @@
   <div class="container my-5 text-white">
     <!-- 배너 -->
     <div class="banner position-relative text-center text-white">
-      <img :src="book.fileds.cover" class="img-fluid w-100 banner-img" alt="Banner" />
+      <img :src="book?.cover" class="img-fluid w-100 banner-img" alt="Banner" />
       <h2 class="banner-title position-absolute top-50 start-50 translate-middle">
         {{ thread?.title }}
       </h2>
@@ -24,7 +24,7 @@
       <div class="col-md-9">
         <div class="content-box bg-dark p-4 rounded shadow">
           <p v-for="(para, idx) in thread?.content.split('\n')" :key="idx" class="mb-3">
-            {{ para }}
+            내용 : {{ para }}
           </p>
         </div>
       </div>
@@ -37,6 +37,9 @@ import { useRoute } from 'vue-router'
 import { useThreadStore } from '@/stores/bookstore'
 import { useBookStore } from '@/stores/bookstore' // ✅ 가정
 import { computed } from 'vue'
+import { onMounted} from 'vue'
+
+
 
 const route = useRoute()
 const threadStore = useThreadStore()
@@ -50,8 +53,15 @@ const thread = computed(() =>
 
 // 책 정보 가져오기
 const book = computed(() =>
-  bookStore.books.find((b) => b.bookId === thread.value?.bookId)
+  bookStore.books.find((b) => b.bookId === thread.bookId)?.fields
 )
+
+
+onMounted(() => {
+  if (bookStore.books.length === 0) {
+    bookStore.loadBooks()
+  }
+})
 
 // 날짜 형식 변환
 const formattedDate = computed(() =>

@@ -43,17 +43,17 @@ export const useBookStore = defineStore('bookstore', {
 
 export const useThreadStore = defineStore('thread', () => {
   const threads = ref([])
-  let id = 0
+  let nextThreadId = ref(0) // ✅ 스토어의 state로 관리
 
   const addThread = function (thread) {
     threads.value.push({
-      threadId: id++,
+      threadId: nextThreadId.value++, // ✅ 스토어의 state를 사용하여 id 할당 후 증가
       title: thread.title,
       content: thread.content,
-      bookId: thread.bookId, // ⬅️ bookId도 저장
-      createdAt: new Date().toISOString(), // 선택: 작성 시간도 저장 가능
+      bookId: thread.bookId,
+      createdAt: new Date().toISOString(),
     })
   }
 
   return { threads, addThread }
-}, { persist: true})
+}, { persist: true })
